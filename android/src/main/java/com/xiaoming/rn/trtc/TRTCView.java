@@ -91,7 +91,7 @@ public class TRTCView extends FrameLayout implements LifecycleEventListener {
 //            Activity activity  = mReactContext.getCurrentActivity();
 //            if (activity != null && activity == _context){
             Log.d("xm", "onHostResume: "+userId);
-            start();
+//            start();
 //            }
 
         } else {
@@ -102,7 +102,7 @@ public class TRTCView extends FrameLayout implements LifecycleEventListener {
 
     @Override
     public void onHostPause() {
-        stop();
+//        stop();
     }
 
     @Override

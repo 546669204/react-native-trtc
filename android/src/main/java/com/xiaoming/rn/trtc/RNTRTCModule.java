@@ -94,14 +94,14 @@ public class RNTRTCModule extends ReactContextBaseJavaModule  implements  Lifecy
   @Override
   public void onHostPause() {
     // Activity `onPause`
-    if (mEngine == null) {
-      return;
-    }
-    try {
-      mEngine.stopLocalPreview();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+//    if (mEngine == null) {
+//      return;
+//    }
+//    try {
+//      mEngine.stopLocalPreview();
+//    } catch (Exception e) {
+//      e.printStackTrace();
+//    }
   }
 
   @Override
