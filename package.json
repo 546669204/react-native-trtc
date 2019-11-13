@@ -1,7 +1,7 @@
 
 {
-  "name": "react-native-ali-rtc",
-  "version": "1.0.0",
+  "name": "react-native-trtc",
+  "version": "1.0.1",
   "description": "",
   "main": "index.tsx",
   "scripts": {
