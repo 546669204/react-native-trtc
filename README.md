@@ -23,15 +23,15 @@ react-native link react-native-trtc
 
 # 使用
 
-
-//初始化引擎
+    
+//初始化引擎  
 initEngine
 
-//进入房间
+//进入房间  
 joinChannel
 
-// 开关本地摄像头采集
-startLocalPreview
+// 开关本地摄像头采集   
+startLocalPreview  
 stopLocalPreview
 
 
@@ -41,3 +41,13 @@ userId 有值时 渲染远端 数据流
  
  
 有问题 issue
+
+
+# 常见问题  
+
+1. > More than one file was found with OS independent path 'lib/arm64-v8a/libc++_shared.so'  
+```
+packagingOptions {
+    pickFirst 'lib/*/libc++_shared.so'
+}
+```
