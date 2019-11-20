@@ -38,6 +38,7 @@ import com.tencent.trtc.TRTCCloudListener;
 import com.tencent.trtc.TRTCStatistics;
 
 import static android.app.Activity.RESULT_OK;
+import static com.tencent.trtc.TRTCCloudDef.TRTCSystemVolumeTypeAuto;
 
 
 public class RNTRTCModule extends ReactContextBaseJavaModule  implements  LifecycleEventListener{
@@ -165,7 +166,7 @@ public class RNTRTCModule extends ReactContextBaseJavaModule  implements  Lifecy
     mEngine.stopLocalPreview();
   }
 
-
+  //音频相关接口函数
   @ReactMethod
   public void startLocalAudio() {
     mEngine.startLocalAudio();
@@ -177,8 +178,45 @@ public class RNTRTCModule extends ReactContextBaseJavaModule  implements  Lifecy
   }
 
   @ReactMethod
+  public void muteLocalAudio(Boolean var) {
+    mEngine.muteLocalAudio(var);
+  }
+
+  @ReactMethod
   public void setAudioRoute(Integer route) {
     mEngine.setAudioRoute(route);
+  }
+
+  @ReactMethod
+  public void muteRemoteAudio(String userId ,Boolean mute) {
+    mEngine.muteRemoteAudio(userId,mute);
+  }
+
+  @ReactMethod
+  public void muteAllRemoteAudio(Boolean mute) {
+    mEngine.muteAllRemoteAudio(mute);
+  }
+
+  @ReactMethod
+  public void enableAudioVolumeEvaluation(Integer intervalMs) {
+    mEngine.enableAudioVolumeEvaluation(intervalMs);
+  }
+
+  @ReactMethod
+  public void startAudioRecording(String filePath,Promise promise) {
+    TRTCCloudDef.TRTCAudioRecordingParams data = new TRTCCloudDef.TRTCAudioRecordingParams();
+    data.filePath = filePath;
+    int ret = mEngine.startAudioRecording(data);
+    promise.resolve(ret);
+  }
+
+  @ReactMethod
+  public void stopAudioRecording() {
+    mEngine.stopAudioRecording();
+  }
+  @ReactMethod
+  public void setSystemVolumeType(Integer var) {
+    mEngine.setSystemVolumeType(var);
   }
 
 
