@@ -51,6 +51,24 @@ export default {
   stopLocalAudio():void{
     RNModule.stopLocalAudio()
   },
+  muteLocalAudio(mute:Boolean):void{
+    RNModule.muteLocalAudio(mute)
+  },
+  muteRemoteAudio(userId:String,mute:Boolean):void{
+    RNModule.muteRemoteAudio(userId,mute)
+  },
+  muteAllRemoteAudio(mute:Boolean):void{
+    RNModule.muteAllRemoteAudio(mute)
+  },
+  enableAudioVolumeEvaluation(intervalMs:Number):void{
+    RNModule.enableAudioVolumeEvaluation(intervalMs)
+  },
+  startAudioRecording(filePath:String):Promise<Number>{
+    return RNModule.startAudioRecording(filePath)
+  },
+  stopAudioRecording():void{
+    RNModule.stopAudioRecording()
+  },
   startScreenRecord():void{
     RNModule.startScreenRecord()
   },
