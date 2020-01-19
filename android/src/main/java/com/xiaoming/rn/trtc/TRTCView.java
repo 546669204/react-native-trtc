@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.tencent.rtmp.ui.TXCloudVideoView;
+import com.tencent.trtc.TRTCCloudDef;
 
 import static com.xiaoming.rn.trtc.RNTRTCModule.frontCamera;
 import static com.xiaoming.rn.trtc.RNTRTCModule.mEngine;
@@ -39,17 +40,24 @@ public class TRTCView extends FrameLayout implements LifecycleEventListener {
 
         this.addView(mCameraView);
 
-        if (mEngine == null) {
-            return ;
-        }
-        if(userId.equals("")){
-            mEngine.startLocalPreview(frontCamera,mLocalView);
-        }else{
-            mEngine.startRemoteView(userId, mLocalView);
-        }
+        start();
 
     }
 
+    @Override
+    public void requestLayout() {
+        super.requestLayout();
+        post(measureAndLayout);
+    }
+    private final Runnable measureAndLayout = new Runnable() {
+        @Override
+        public void run() {
+            measure(
+                    MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY),
+                    MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.EXACTLY));
+            layout(getLeft(), getTop(), getRight(), getBottom());
+        }
+    };
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
@@ -63,6 +71,7 @@ public class TRTCView extends FrameLayout implements LifecycleEventListener {
         if(userId.equals("")){
             mEngine.startLocalPreview(frontCamera,mLocalView);
         }else{
+            mEngine.setRemoteViewFillMode(userId, TRTCCloudDef.TRTC_VIDEO_RENDER_MODE_FIT);
             mEngine.startRemoteView(userId, mLocalView);
         }
 
@@ -72,14 +81,17 @@ public class TRTCView extends FrameLayout implements LifecycleEventListener {
             return ;
         }
         if(userId.equals("")){
-            mEngine.stopLocalPreview();
+//            mEngine.stopLocalPreview();
         }else{
             mEngine.stopRemoteView(userId);
         }
 
     }
     public void setUserId(String var1){
+        stop();
         this.userId = var1;
+        mLocalView.setUserId(var1);
+        start();
     }
 
 
@@ -91,7 +103,7 @@ public class TRTCView extends FrameLayout implements LifecycleEventListener {
 //            Activity activity  = mReactContext.getCurrentActivity();
 //            if (activity != null && activity == _context){
             Log.d("xm", "onHostResume: "+userId);
-//            start();
+            start();
 //            }
 
         } else {
@@ -102,7 +114,7 @@ public class TRTCView extends FrameLayout implements LifecycleEventListener {
 
     @Override
     public void onHostPause() {
-//        stop();
+        stop();
     }
 
     @Override
