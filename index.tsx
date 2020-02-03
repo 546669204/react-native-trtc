@@ -2,7 +2,7 @@ import { NativeModules , NativeEventEmitter , requireNativeComponent } from "rea
 import React from "react";
 const RNModule = NativeModules.RNTRTCModule;
 var RNRTCView = requireNativeComponent("RNTRTCView");
-
+const eventEmitter = new NativeEventEmitter(RNModule);
 type JoinChannelType = {
   sdkAppId:Number,
   userId:String,
@@ -22,6 +22,7 @@ class RTCVIew extends React.Component {
     super(props)
   }
   render(){
+    console.log("RTCVIew render",this.props)
     return <RNRTCView {...this.props} />;
   }
 }
@@ -85,8 +86,15 @@ export default {
 
   addListener(eventName,handler) {
     if(!eventName||!handler)return;
-    const eventEmitter = new NativeEventEmitter(RNModule);
     return eventEmitter.addListener(eventName, handler)
+  },
+  removeListener(eventName,handler){
+    if(!eventName)return;
+    if(!handler){
+      eventEmitter.removeAllListeners(eventName)
+      return
+    }
+    eventEmitter.removeListener(eventName,handler)
   }
 };
 
