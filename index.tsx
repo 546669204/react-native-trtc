@@ -1,8 +1,10 @@
 import { NativeModules , NativeEventEmitter , requireNativeComponent } from "react-native";
 import React from "react";
+
 const RNModule = NativeModules.RNTRTCModule;
 var RNRTCView = requireNativeComponent("RNTRTCView");
 const eventEmitter = new NativeEventEmitter(RNModule);
+
 type JoinChannelType = {
   sdkAppId:Number,
   userId:String,
@@ -12,17 +14,18 @@ type JoinChannelType = {
   privateMapKey?:String
   businessInfo?:String
 }
+
 enum Scene  {
   VideoCall,
   Live,
 }
 
-class RTCVIew extends React.Component {
+class RTCView extends React.Component {
   constructor(props){
     super(props)
   }
   render(){
-    console.log("RTCVIew render",this.props)
+    console.log("RTCView render",this.props)
     return <RNRTCView {...this.props} />;
   }
 }
@@ -100,5 +103,5 @@ export default {
 
 
 export {
-  RTCVIew
+  RTCView
 }

@@ -13,7 +13,7 @@ public class TRTCViewManager extends SimpleViewManager<TRTCView> {
     public static final String REACT_CLASS = "RNTRTCView";
 
     public enum Events {
-        EVENT_ON_TRAXK("onTrack"),
+        EVENT_ON_TRACK("onTrack"),
         EVENT_ON_FACE_DETECT("onFaceDetect");
 
         private final String mName;
