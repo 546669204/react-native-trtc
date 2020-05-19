@@ -13,6 +13,8 @@ type JoinChannelType = {
   role:Number,
   privateMapKey?:String
   businessInfo?:String
+  streamId?:String
+  userDefineRecordId?:String
 }
 
 enum Scene  {
@@ -37,6 +39,8 @@ export default {
   joinChannel(data:JoinChannelType,scene:Scene):Promise<Boolean> {
     data.privateMapKey = data.privateMapKey || "";
     data.businessInfo = data.businessInfo || "";
+    data.streamId = data.streamId || "";
+    data.userDefineRecordId = data.userDefineRecordId || "";
 
     return RNModule.joinChannel(data,scene)
   },

@@ -141,6 +141,8 @@ public class RNTRTCModule extends ReactContextBaseJavaModule  implements  Lifecy
     userInfo.role = data.getInt("role");
     userInfo.privateMapKey = data.getString("privateMapKey");
     userInfo.businessInfo = data.getString("businessInfo");
+    userInfo.streamId = data.getString("streamId");
+    userInfo.userDefineRecordId = data.getString("userDefineRecordId");
     // 加入频道
     mEngine.enterRoom(userInfo, scene);
     promise.resolve(true);
